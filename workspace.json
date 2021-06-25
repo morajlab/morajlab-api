@@ -1,0 +1,156 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/gatsby": {
+      "application": {
+        "style": "css"
+      }
+    }
+  },
+  "projects": {
+    "official-website-cms": {
+      "root": "apps/official-website-cms",
+      "sourceRoot": "apps/official-website-cms",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/official-website-cms",
+            "outputPath": "dist/apps/official-website-cms"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "official-website-cms:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "official-website-cms:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "official-website-cms:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/official-website-cms"],
+          "options": {
+            "jestConfig": "apps/official-website-cms/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/official-website-cms/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        }
+      }
+    },
+    "official-website-cms-e2e": {
+      "root": "apps/official-website-cms-e2e",
+      "sourceRoot": "apps/official-website-cms-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/official-website-cms-e2e/cypress.json",
+            "tsConfig": "apps/official-website-cms-e2e/tsconfig.e2e.json",
+            "devServerTarget": "official-website-cms:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "official-website-cms:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/official-website-cms-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "official-website-utilities": {
+      "root": "libs/official-website/utilities",
+      "sourceRoot": "libs/official-website/utilities/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/official-website/utilities/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/official-website/utilities"],
+          "options": {
+            "jestConfig": "libs/official-website/utilities/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "official-website-types": {
+      "root": "libs/official-website/types",
+      "sourceRoot": "libs/official-website/types/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/official-website/types/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/official-website/types"],
+          "options": {
+            "jestConfig": "libs/official-website/types/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  }
+}

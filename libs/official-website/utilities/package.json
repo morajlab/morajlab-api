@@ -1,0 +1,8 @@
+{
+  "name": "@official-website/utilities",
+  "version": "0.0.1",
+  "dependencies": {
+    "remark": "^13.0.0",
+    "remark-html": "^13.0.1"
+  }
+}
